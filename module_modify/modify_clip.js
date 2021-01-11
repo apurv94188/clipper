@@ -22,10 +22,16 @@ function addreq_to_json_obj (req, res, next) {
 // add clip
 router.post('/addClip', addreq_to_json_obj, db.add_clip_to_db, (req, res, next) => {
     cf.log_msg('addClip router from modify_clip');
-    if (req.status == 1) {
+    if (req.db_status == 1) {
+        cf.log_msg("add clip saved successfully");
         res.status(200).json({
             msg: 'Clip Saved Successfully',
             saved_clip_name: req.saved_clip.name
+        });
+    } else {
+        cf.log_msg("add clip saved successfully");
+        res.status(500).json({
+            msg: 'Clip could not be saved'
         });
     }
 });

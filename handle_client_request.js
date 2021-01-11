@@ -33,7 +33,15 @@ app.use((req, res, next) => {
 
 // ++ route incoming request
 
+
+// middleware body parser - parse incoming url
+app.use(bodyParser.urlencoded({extended: false})); // if u set the extended=true then it can parse rich data url. But for now we don't need that
+
 // parse incoming request
+// in the below statement we have parsed the incoming request using json body parser. 
+// Now the request object has body as the parameter which has all the url json's eys as sub paramater (parameter of 'req.body')
+// and their value is the value of url json key's values
+// this works with POST method as we can pass json format data. Json format data with POST method is passed though url
 app.use(bodyParser.json());
 cf.log_msg('client request parsed');
 
@@ -41,8 +49,15 @@ cf.log_msg('client request parsed');
 app.use('/modifyClip', route_modify);
 
 app.use((req, res, next) => {
+    cf.log_msg("hurrey");
+    res.status(200).json({
+        message: 'Client request received'
+    });
+});
+
+app.use((req, res, next) => {
     cf.log_msg('Error Couldnt handle request');
-    var error = new Error('This request can\'t be haandled');
+    var error = new Error('This request could not be haandled');
     error.status(404);
     next(error);
 });
