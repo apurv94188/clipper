@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     //cf.log_msg('handelling CORSE errors');
     res.header("Access-Control-Allow-Origin", "*");
     // this will make the server handle the request originated from your websites
-    //res.header("Access-Control-Allow-Origin", "https://friendsReview.com")
+    // res.header("Access-Control-Allow-Origin", "https://friendsReview.com")
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -45,7 +45,7 @@ app.use(bodyParser.urlencoded({extended: false})); // if u set the extended=true
 app.use(bodyParser.json());
 cf.log_msg('client request parsed');
 
-//app.use('/searchclip', route_search);
+app.use('/searchClip', route_search);
 app.use('/modifyClip', route_modify);
 
 app.use((req, res, next) => {
